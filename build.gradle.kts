@@ -1,15 +1,21 @@
 plugins {
-    kotlin("jvm") version "1.9.21"
+    kotlin("jvm") version "2.0.0"
 }
 
-sourceSets {
-    main {
-        kotlin.srcDir("src")
-    }
+group = "org.openwarez"
+version = "0.0.1"
+
+repositories {
+    mavenCentral()
 }
 
-tasks {
-    wrapper {
-        gradleVersion = "8.5"
-    }
+dependencies {
+    testImplementation(kotlin("test"))
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+kotlin {
+    jvmToolchain(17)
 }
