@@ -1,14 +1,20 @@
 package org.openwarez.aok
 
 import java.math.BigInteger
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.security.MessageDigest
-import kotlin.io.path.Path
-import kotlin.io.path.readLines
 
 /**
  * Reads lines from the given input txt file.
  */
-fun readInput(name: String) = Path("src/$name.txt").readLines()
+fun readInput(name: String): List<String> {
+    val classLoader = Thread.currentThread().contextClassLoader
+    val resource = classLoader.getResource(name)
+        ?: throw IllegalArgumentException("file not found! $name")
+    val path = Paths.get(resource.toURI())
+    return Files.readAllLines(path)
+}
 
 /**
  * Converts string to md5 hash.
